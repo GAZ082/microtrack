@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ResumenVehiculo" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/ResumenVehicular" />
+      <xs:element name="ResumenDiario">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="desde" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="hasta" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ResumenDiarioResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="ResumenDiarioResult" nillable="true" type="q1:ArrayOfDatosVehiculo" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ResumenDiarioids">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="desde" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="hasta" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ResumenDiarioidsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="ResumenDiarioidsResult" nillable="true" type="q2:ArrayOfDatosVehiculoID" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ResumenMensual">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="desde" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="hasta" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ResumenMensualResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="ResumenMensualResult" nillable="true" type="q3:ArrayOfDatosIdentificadores" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UltimaPosicionLlave">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UltimaPosicionLlaveResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="UltimaPosicionLlaveResult" nillable="true" type="q4:DatosIdentificador" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarPosiciones">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="patente" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="desde" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="hasta" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultarPosicionesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="ConsultarPosicionesResult" nillable="true" type="q5:ArrayOfItemPosicion" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DetalleFranja">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="desde" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="hasta" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="acceso" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DetalleFranjaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ResumenVehicular" minOccurs="0" name="DetalleFranjaResult" nillable="true" type="q6:ArrayOfDatosFranja" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ResumenVehicular" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ResumenVehicular" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfDatosVehiculo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DatosVehiculo" nillable="true" type="tns:DatosVehiculo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDatosVehiculo" nillable="true" type="tns:ArrayOfDatosVehiculo" />
+      <xs:complexType name="DatosVehiculo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Conductor" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Kms" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Maxima" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoActivoSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoDesconexionSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoDetenidoSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoRalentiSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="Vehiculo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DatosVehiculo" nillable="true" type="tns:DatosVehiculo" />
+      <xs:complexType name="ArrayOfDatosVehiculoID">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DatosVehiculoID" nillable="true" type="tns:DatosVehiculoID" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDatosVehiculoID" nillable="true" type="tns:ArrayOfDatosVehiculoID" />
+      <xs:complexType name="DatosVehiculoID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Conductor" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Kms" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Maxima" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoActivoSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoDesconexionSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoDetenidoSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="TiempoRalentiSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="Vehiculo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VehiculoID" type="xs:int" />
+          <xs:element minOccurs="0" name="VehiculoPatente" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DatosVehiculoID" nillable="true" type="tns:DatosVehiculoID" />
+      <xs:complexType name="ArrayOfDatosIdentificadores">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DatosIdentificadores" nillable="true" type="tns:DatosIdentificadores" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDatosIdentificadores" nillable="true" type="tns:ArrayOfDatosIdentificadores" />
+      <xs:complexType name="DatosIdentificadores">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccCent" type="xs:int" />
+          <xs:element minOccurs="0" name="Accelerations" type="xs:int" />
+          <xs:element minOccurs="0" name="Braking" type="xs:int" />
+          <xs:element minOccurs="0" name="FechaDesde" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FechaHasta" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InfHigh" type="xs:int" />
+          <xs:element minOccurs="0" name="InfLight" type="xs:int" />
+          <xs:element minOccurs="0" name="InfMedium" type="xs:int" />
+          <xs:element minOccurs="0" name="InfTotal" type="xs:int" />
+          <xs:element minOccurs="0" name="Kms" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Score" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ScoreAP" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ScoreRR" type="xs:decimal" />
+          <xs:element minOccurs="0" name="ScoreZU" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DatosIdentificadores" nillable="true" type="tns:DatosIdentificadores" />
+      <xs:complexType name="DatosIdentificador">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Latitud" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Longitud" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Pais" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Vehiculo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DatosIdentificador" nillable="true" type="tns:DatosIdentificador" />
+      <xs:complexType name="ArrayOfItemPosicion">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemPosicion" nillable="true" type="tns:ItemPosicion" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfItemPosicion" nillable="true" type="tns:ArrayOfItemPosicion" />
+      <xs:complexType name="ItemPosicion">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FechaHora" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Latitud" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Llave" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Longitud" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Operador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Patente" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TipoEvento" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Velocidad" type="xs:short" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ItemPosicion" nillable="true" type="tns:ItemPosicion" />
+      <xs:complexType name="ArrayOfDatosFranja">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DatosFranja" nillable="true" type="tns:DatosFranja" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDatosFranja" nillable="true" type="tns:ArrayOfDatosFranja" />
+      <xs:complexType name="DatosFranja">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DuracionSegundos" type="xs:int" />
+          <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Identificador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Latitud" type="xs:int" />
+          <xs:element minOccurs="0" name="Longitud" type="xs:int" />
+          <xs:element minOccurs="0" name="Metros" type="xs:int" />
+          <xs:element minOccurs="0" name="Operador" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OperadorID" type="xs:int" />
+          <xs:element minOccurs="0" name="Sitio" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TipoEvento" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Vehiculo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Zona" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DatosFranja" nillable="true" type="tns:DatosFranja" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IResumenVehicular_ResumenDiario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenDiario" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ResumenDiario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenDiarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ResumenDiarioids_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenDiarioids" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ResumenDiarioids_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenDiarioidsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ResumenMensual_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenMensual" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ResumenMensual_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResumenMensualResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_UltimaPosicionLlave_InputMessage">
+    <wsdl:part name="parameters" element="tns:UltimaPosicionLlave" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_UltimaPosicionLlave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UltimaPosicionLlaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ConsultarPosiciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarPosiciones" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_ConsultarPosiciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarPosicionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_DetalleFranja_InputMessage">
+    <wsdl:part name="parameters" element="tns:DetalleFranja" />
+  </wsdl:message>
+  <wsdl:message name="IResumenVehicular_DetalleFranja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DetalleFranjaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IResumenVehicular">
+    <wsdl:operation name="ResumenDiario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenDiario" message="tns:IResumenVehicular_ResumenDiario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenDiarioResponse" message="tns:IResumenVehicular_ResumenDiario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResumenDiarioids">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenDiarioids" message="tns:IResumenVehicular_ResumenDiarioids_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenDiarioidsResponse" message="tns:IResumenVehicular_ResumenDiarioids_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResumenMensual">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenMensual" message="tns:IResumenVehicular_ResumenMensual_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/ResumenMensualResponse" message="tns:IResumenVehicular_ResumenMensual_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UltimaPosicionLlave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/UltimaPosicionLlave" message="tns:IResumenVehicular_UltimaPosicionLlave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/UltimaPosicionLlaveResponse" message="tns:IResumenVehicular_UltimaPosicionLlave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPosiciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/ConsultarPosiciones" message="tns:IResumenVehicular_ConsultarPosiciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/ConsultarPosicionesResponse" message="tns:IResumenVehicular_ConsultarPosiciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DetalleFranja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IResumenVehicular/DetalleFranja" message="tns:IResumenVehicular_DetalleFranja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IResumenVehicular/DetalleFranjaResponse" message="tns:IResumenVehicular_DetalleFranja_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IResumenVehicular" type="tns:IResumenVehicular">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ResumenDiario">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/ResumenDiario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResumenDiarioids">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/ResumenDiarioids" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResumenMensual">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/ResumenMensual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UltimaPosicionLlave">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/UltimaPosicionLlave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPosiciones">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/ConsultarPosiciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DetalleFranja">
+      <soap:operation soapAction="http://tempuri.org/IResumenVehicular/DetalleFranja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ResumenVehiculo">
+    <wsdl:port name="BasicHttpBinding_IResumenVehicular" binding="tns:BasicHttpBinding_IResumenVehicular">
+      <soap:address location="http://dal-serviciosexternosgral.azurewebsites.net/ResumenVehiculo.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
