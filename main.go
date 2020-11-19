@@ -18,7 +18,7 @@ func main() {
 	user := flag.String("user", "", "user")
 	pass := flag.String("pass", "", "password")
 	schema := flag.String("schema", "", "table schema")
-	whatdata := flag.String("whatdata", "", "what data to retrieve [monthBrief (requieres from, to, be in the same month, 1 to end of month, ie: 2020-01-01 2020-01-31)]")
+	whatdata := flag.String("whatdata", "", "what data to retrieve [monthBrief (requires from, to, be in the same month, 1 to end of month, ie: 2020-01-01 2020-01-31)]")
 	from := flag.String("from", "", "date from")
 	to := flag.String("to", "", "date to")
 	flag.Parse()
