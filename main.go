@@ -1,36 +1,47 @@
 package main
 
 import (
-	"gomicrotrack/db"
-	mt "gomicrotrack/microtrack"
-
+	"flag"
 	"log"
 	"os"
+	"strconv"
+
+	"github.com/gaz082/microtrack/microtrack"
 )
 
-func start(args []string) {
-
-	log.Print(`
-	=== MICROTRACK DATA LOAD ===
-	V0.0 2020-03-20
-	gabriel.zorrilla@galileoar.com
-	Usage: microtrackload from to
-	from, to:  dates with format YYYY-MM-DD
-`)
-
-	//the first argument is the command
-	switch len(args) - 1 {
-	case 1:
-		log.Printf("Inserting records to database of %v", args[1])
-		db.InsertRecords(mt.DayDetail(args[1], args[1]))
-	case 2:
-		log.Printf("Inserting records to database from %v to %v", args[1], args[2])
-		db.InsertRecords(mt.DayDetail(args[1], args[2]))
-	default:
-		log.Print("Missing parameters.")
-	}
-}
-
 func main() {
-	start(os.Args)
+	var logFile, _ = os.OpenFile("/tmp/microtrack.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	log.SetOutput(logFile)
+	log.Print("----------::STARTING::----------")
+	host := flag.String("host", "localhost", "host")
+	port := flag.Int("port", 5432, "port")
+	database := flag.String("database", "", "database")
+	user := flag.String("user", "", "user")
+	pass := flag.String("pass", "", "password")
+	schema := flag.String("schema", "", "table schema")
+	whatdata := flag.String("whatdata", "", "what data to retrieve [monthBrief (requieres from, to, be in the same month, 1 to end of month, ie: 2020-01-01 2020-01-31)]")
+	from := flag.String("from", "", "date from")
+	to := flag.String("from", "", "date to")
+	flag.Parse()
+	if *database == "" || *user == "" || *pass == "" || *schema == "" || *whatdata == "" || *from == "" || *to == "" {
+		log.Printf(
+			`MICROTRACK DATA LOAD (c) 2020 Gabriel A. Zorrilla - @GabrielZorrilla%v
+			Build: %v%v
+			Missing arguments%v
+			Example: microtrack -database=database -user=user -pass="password" -whatdata=monthBrief -schema=public%v -from=2020-03-01 -to=2020-03-21
+			Use microtrack -h to check default values. Log in /tmp/microtrack.log
+		`, "\n", "2020-11-05", "\n", "\n", "\n")
+		os.Exit(1)
+	}
+
+	microtrack.Run([]string{
+		*host,
+		strconv.Itoa(*port),
+		*database,
+		*user,
+		*pass, //4
+		*whatdata,
+		*schema,
+		*from,
+		*to})
 }

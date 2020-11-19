@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/xml"
-	"gomicrotrack/tool"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -154,6 +153,7 @@ type DatosIdentificadores struct {
 	ScoreAP       float64    `xml:"ScoreAP,omitempty"`
 	ScoreRR       float64    `xml:"ScoreRR,omitempty"`
 	ScoreZU       float64    `xml:"ScoreZU,omitempty"`
+	Period        string
 }
 
 type DatosIdentificador struct {
@@ -556,9 +556,12 @@ func (c *CustomTime) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error 
 	const customForm = "2006-01-02T15:04:05"
 	var v string
 	err := d.DecodeElement(&v, &start)
-	tool.CheckError(err, "info")
+	checkError(err, "info")
+	if v[len(v)-1] == 90 { //90 = Z en byte de tabla UTF8
+		v = v[:len(v)-1] //quito la Z
+	}
 	parse, err := time.Parse(customForm, v)
-	tool.CheckError(err, "info")
+	checkError(err, "info")
 	*c = CustomTime{parse}
 	return nil
 }
@@ -571,9 +574,9 @@ func (c *CustomTime) String() string {
 
 func generateTimeWindow(from, to string) (fromt, tot time.Time) {
 	fromt, err := time.Parse("2006-01-02 15:04:05", from+" 00:00:00")
-	tool.CheckError(err, "panic")
+	checkError(err, "panic")
 	tot, err = time.Parse("2006-01-02 15:04:05", to+" 23:59:59")
-	tool.CheckError(err, "panic")
+	checkError(err, "panic")
 	return
 }
 
@@ -586,24 +589,22 @@ func DayDetail(from, to string) []*DatosFranja {
 	fromc, toc = CustomTime{fromt}, CustomTime{tot}
 	franja := DetalleFranja{Desde: fromc, Hasta: toc, Acceso: PASSWORD}
 	err, out := conector.DetalleFranja(&franja)
-	tool.CheckError(err, "panic")
+	checkError(err, "panic")
 	return out.DetalleFranjaResult.DatosFranja
 }
 
-// MonthlyBrief date must be formatted ISO: YYYYY-MM-DD"
-func MonthlyBrief(from, to string) *ResumenMensualResponse {
+// MonthlyBrief returns a detail of the day. Day must be formatted ISO: YYYYY-MM-DD"
+func MonthlyBrief(from, to string) []*DatosIdentificadores {
 	PASSWORD := "968b354f5cbc8942d60079b4c1c5620b"
 	conector := NewIResumenVehicular("http://dal-serviciosexternosgral.azurewebsites.net/ResumenVehiculo.svc", false, nil)
 	fromt, tot := generateTimeWindow(from, to)
-	out, err := conector.ResumenMensual(&ResumenMensual{
-		Desde: CustomTime{
-			Time: fromt,
-		},
-		Hasta: CustomTime{
-			Time: tot,
-		},
-		Acceso: PASSWORD,
-	})
-	tool.CheckError(err, "panic")
-	return out
+	var fromc, toc CustomTime
+	fromc, toc = CustomTime{fromt}, CustomTime{tot}
+	franja := ResumenMensual{Desde: fromc, Hasta: toc, Acceso: PASSWORD}
+	out, err := conector.ResumenMensual(&franja)
+	checkError(err, "panic")
+	for _, v := range out.ResumenMensualResult.DatosIdentificadores {
+		v.Period = from
+	}
+	return out.ResumenMensualResult.DatosIdentificadores
 }

@@ -1,4 +1,4 @@
-package tool
+package microtrack
 
 import (
 	"log"
@@ -6,7 +6,7 @@ import (
 )
 
 //CheckError two modes, info or panic.
-func CheckError(err error, mode string) bool {
+func checkError(err error, mode string) bool {
 	if err != nil {
 		s := string(debug.Stack())
 		if mode == "info" {
