@@ -3,6 +3,8 @@ package microtrack
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
 
 	database "github.com/jackc/pgx/v4"
 )
@@ -16,6 +18,9 @@ func connect(args []string) (*database.Conn, error) {
 }
 
 func Run(args []string) {
+	var logFile, _ = os.OpenFile("/tmp/microtrack.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	log.SetOutput(logFile)
+	log.Print("----------::STARTING::----------")
 	var err error
 	DB, err = connect(args)
 	checkError(err, "panic")
