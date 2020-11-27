@@ -27,7 +27,7 @@ CREATE TABLE public.resumen_mensual (
 	accCent int2 not null,
 	accelerations int2 not null,
 	braking int2 not null,
-	identificador varchar(16) not null,
+	identificador TEXT not null,
 	infHigh int2 not null,
 	infLight int2 not null,
 	infMedium int2 not null,
