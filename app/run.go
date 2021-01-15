@@ -25,6 +25,6 @@ func Run(args []string) {
 	DB, err = connect(args)
 	checkError(err, "panic")
 	if args[5] == "monthBrief" {
-		InsertRecordsMontlhy(MonthlyBrief(args[7], args[8]))
+		//	InsertRecordsMontlhy(MonthlyBrief(args[7], args[8]))
 	}
 }
