@@ -8,26 +8,13 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-var (
-	args = []string{
-		"45.33.2.159",
-		"5432",
-		"microtrack",
-		"leer_insertar_user",
-		"CLAVE",
-		"monthBrief",
-		"public",
-		"2020-10-01",
-		"2020-10-31",
-	}
-)
-
 func TestRun(t *testing.T) {
+	args := []string{"monthBrief", "202004", "e6da90a7853f4aafa1ae8308c5ebaa7f"}
 	Run(args)
 }
 
 func Test_connection(t *testing.T) {
-	DB, err := connect(args)
+	DB, err := connect()
 	if err != nil {
 		log.Print(err)
 	}
@@ -41,9 +28,9 @@ func Test_connection(t *testing.T) {
 
 func Test_GetAPIToken(t *testing.T) {
 	s := GetApiToken(
-		"gengelmann",
-		"RcTybM3hcV",
-		"de7c21f6-fb85-49cb-b6a4-f80925d7de74",
+		"xx",
+		"xx",
+		"xx",
 	)
 	log.Printf("%v", s)
 	value := gjson.Get(s, "access_token")
@@ -54,7 +41,6 @@ func Test_GetAPIToken(t *testing.T) {
 func Test_processResumenMensual(t *testing.T) {
 	IDPlanilla := "e6da90a7853f4aafa1ae8308c5ebaa7f"
 	raw := getResumenMensual(202001, IDPlanilla, 1)
-
 	log.Printf("%v", processResumenMensual(raw, 202001))
 
 }

@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"strconv"
 	"time"
 
+	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
@@ -30,11 +30,21 @@ type RecordResumenMensual struct {
 	Period        int32
 }
 
-const (
-	user     = "gengelmann"
-	password = "RcTybM3hcV"
-	clientID = "de7c21f6-fb85-49cb-b6a4-f80925d7de74"
+var (
+	config = readConfig("microtrack")
 )
+
+func readConfig(fileName string) (config *viper.Viper) {
+	config = viper.New()
+	config.SetConfigName(fileName)
+	config.SetConfigType("yaml")
+	config.AddConfigPath("$HOME/.config")
+	err := config.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	}
+	return
+}
 
 func GetApiToken(user, password, clientID string) (token string) {
 	//Generado por POSTMAN
@@ -75,19 +85,19 @@ func GetApiToken(user, password, clientID string) (token string) {
 
 }
 
-// getResumenMensual. Mes en formato YYYYMM
-func getResumenMensual(mes int, IDPlantilla string, version int) []byte {
-	mesTime, _ := time.Parse("200601", strconv.Itoa(mes))
+// getResumenMensual. Period format YYYYMM
+func getResumenMensual(period int, IDPlantilla string, version int) []byte {
+	mesTime, _ := time.Parse("200601", strconv.Itoa(period))
 	desde := mesTime.Format("2006-01-02")
 	hasta := mesTime.AddDate(0, 1, -1).Format("2006-01-02")
-
 	url := fmt.Sprintf("https://webapiproactivo-clientes.azurewebsites.net/api/%v/Ranking/%v/ResumenMensual?desde=%v&hasta=%v", version, IDPlantilla, desde, hasta)
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
-	token := GetApiToken(user, password, clientID)
+	token := GetApiToken(config.GetString("app.user"), config.GetString("app.password"),
+		config.GetString("app.clientID"))
 	req.Header.Add("Authorization", "Bearer "+token)
 	res, _ := client.Do(req)
 	defer res.Body.Close()
@@ -97,7 +107,6 @@ func getResumenMensual(mes int, IDPlantilla string, version int) []byte {
 
 func processResumenMensual(input []byte, period int32) (output []RecordResumenMensual) {
 	for _, v := range gjson.ParseBytes(input).Array() {
-		log.Printf("%v", v.String())
 		record := RecordResumenMensual{
 			AccCent:       int32(v.Get("accCent").Int()),
 			Accelerations: int32(v.Get("accelerations").Int()),

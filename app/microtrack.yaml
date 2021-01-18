@@ -1,0 +1,12 @@
+#do not use tabs, just spaces to indent.
+db: #database
+ host: localhost
+ port: 5432
+ name: microtrack
+ schema: public
+ user: user
+ password: pass
+app:
+ user: mt_user
+ password: mt_pass
+ clientID: mt_client_id

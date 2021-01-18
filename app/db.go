@@ -11,18 +11,18 @@ import (
 // db is the global database connection.
 var DB *database.Conn
 
-func doQueryMonthlyBrief(records []*RecordResumenMensual) (recordsQuantity int) {
+func doQueryMonthlyBrief(records *[]RecordResumenMensual) (recordsQuantity int) {
 	rows := [][]interface{}{}
-	for _, row := range records {
+	for _, row := range *records {
 		rows = append(rows, []interface{}{row.Period, row.AccCent, row.Accelerations, row.Braking, row.Identificador, row.InfHigh, row.InfLight, row.InfMedium, row.Kms, row.Score, row.ScoreAP, row.ScoreRR, row.ScoreZU})
 	}
 	_, err := DB.CopyFrom(context.Background(),
 		pgx.Identifier{"resumen_mensual"}, []string{"period", "acccent", "accelerations", "braking", "identificador", "infhigh", "inflight", "infmedium", "km", "score", "scoreap", "scorerr", "scorezu"}, pgx.CopyFromRows(rows))
 	checkError(err, "info")
-	return len(records)
+	return len(*records)
 }
 
-func InsertRecordsMontlhy(records []*RecordResumenMensual) {
+func InsertRecordsMontlhy(records *[]RecordResumenMensual) {
 	txn, err := DB.Begin(context.Background()) // db is never closed
 	checkError(err, "i")
 	q := doQueryMonthlyBrief(records)
